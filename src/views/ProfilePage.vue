@@ -20,6 +20,17 @@
                 </ion-avatar>
             </div>
 
+                <div class="group group2">
+                    <ion-item>
+                        <ion-input 
+                            label="Hello," 
+                            :value="user?.displayName" 
+                            :readonly="true" 
+                            class="custom-hello-label"
+                        ></ion-input>
+                    </ion-item>
+                </div>
+
             <!-- Data Profile -->
             <ion-list>
                 <ion-item>
@@ -68,5 +79,23 @@ function handleImageError() {
 #avatar-icon {
     width: 80px;
     height: 80px;
+}
+
+.custom-hello-label {
+    --ion-label-font-size: 24px !important;
+    font-weight: bold !important;
+}
+
+.custom-hello-label ::part(label) {
+    font-weight: bold !important;
+}
+
+.custom-hello-label {
+    font-size: 24px !important;
+}
+
+/* Try global Ionic label styling */
+ion-input {
+    --ion-label-font-size: 24px !important;
 }
 </style>

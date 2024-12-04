@@ -2,7 +2,7 @@
     <ion-modal :is-open="isOpen" @did-dismiss="cancel">
         <ion-header>
             <ion-toolbar>
-                <ion-title>{{ editingId ? 'Edit' : 'Add' }} Todo</ion-title>
+                <ion-title>{{ editingId ? 'Edit' : 'Add' }} Recipe</ion-title>
                 <ion-buttons slot="start">
                     <ion-button @click="cancel"><ion-icon :icon="close"></ion-icon></ion-button>
                 </ion-buttons>
@@ -14,13 +14,13 @@
                     placeholder="Enter Title"></ion-input>
             </ion-item>
             <ion-item>
-                <ion-textarea v-model="localTodo.description" label="Description" label-placement="floating"
-                    placeholder="Enter Description" :autogrow="true" :rows="3"></ion-textarea>
+                <ion-textarea v-model="localTodo.description" label="Recipe" label-placement="floating"
+                    placeholder="Enter Recipe" :autogrow="true" :rows="3"></ion-textarea>
             </ion-item>
             <ion-row>
                 <ion-col>
                     <ion-button type="button" @click="input" shape="round" color="primary" expand="block">
-                        {{ editingId ? 'Edit' : 'Add' }} Todo
+                        {{ editingId ? 'Edit' : 'Add' }} Recipe
                     </ion-button>
                 </ion-col>
             </ion-row>

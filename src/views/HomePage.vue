@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Home</ion-title>
+        <ion-title>Resep</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -47,7 +47,7 @@
             </ion-item-options>
           </ion-item-sliding>
           <ion-item v-if="activeTodos.length === 0" class="ion-text-center">
-            <ion-label>No active todos</ion-label>
+            <ion-label>No Recent Recipes</ion-label>
           </ion-item>
         </ion-list>
       </div>
@@ -57,7 +57,7 @@
         <ion-accordion-group>
           <ion-accordion value="first">
             <ion-item slot="header" color="light">
-              <ion-label class="ion-text-center">Completed</ion-label>
+              <ion-label class="ion-text-center">Archived/Completed Recipe</ion-label>
             </ion-item>
             <div slot="content" class="scrollable-container">
               <ion-list>
@@ -93,7 +93,7 @@
                   </ion-item-options>
                 </ion-item-sliding>
                 <ion-item v-if="completedTodos.length === 0" class="ion-text-center">
-                  <ion-label>No completed todos</ion-label>
+                  <ion-label>No Archived/Completed Recipes</ion-label>
                 </ion-item>
               </ion-list>
             </div>
@@ -238,10 +238,10 @@ const handleSubmit = async (todo: Omit<Todo, "id" | "createdAt" | "updatedAt" | 
   try {
     if (editingId.value) {
       await firestoreService.updateTodo(editingId.value, todo as Todo);
-      await showToast("Todo updated successfully", "success", checkmarkCircle);
+      await showToast("Recipe updated successfully", "success", checkmarkCircle);
     } else {
       await firestoreService.addTodo(todo as Todo);
-      await showToast("Todo added successfully", "success", checkmarkCircle);
+      await showToast("Recipe added successfully", "success", checkmarkCircle);
     }
     loadTodos();
   } catch (error) {
@@ -267,10 +267,10 @@ const handleEdit = async (editTodo: Todo) => {
 const handleDelete = async (deleteTodo: Todo) => {
   try {
     await firestoreService.deleteTodo(deleteTodo.id!);
-    await showToast("Todo deleted successfully", "success", checkmarkCircle);
+    await showToast("Recipe deleted successfully", "success", checkmarkCircle);
     loadTodos();
   } catch (error) {
-    await showToast("Failed to delete todo", "danger", closeCircle);
+    await showToast("Failed to delete Recipe", "danger", closeCircle);
     console.error(error);
   }
 };
@@ -281,7 +281,7 @@ const handleStatus = async (statusTodo: Todo) => {
   try {
     await firestoreService.updateStatus(statusTodo.id!, !statusTodo.status);
     await showToast(
-      `Todo marked as ${!statusTodo.status ? "completed" : "active"}`,
+      `Recipe marked as ${!statusTodo.status ? "completed" : "active"}`,
       "success",
       checkmarkCircle
     );
