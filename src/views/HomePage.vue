@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Resep</ion-title>
+        <ion-title>Resep Remy Urun Daya</ion-title>
       </ion-toolbar>
     </ion-header>
 

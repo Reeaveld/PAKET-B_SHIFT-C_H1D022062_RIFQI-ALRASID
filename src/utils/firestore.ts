@@ -26,9 +26,7 @@ export interface Todo {
 export const firestoreService = {
     // get collection ref
     getTodoRef() {
-        const uid = auth.currentUser?.uid;
-        if (!uid) throw new Error('User not authenticated');
-        return collection(db, 'users', uid, 'todos');
+        return collection(db, 'todos');
     },
 
 		// create
@@ -49,20 +47,22 @@ export const firestoreService = {
     },
 
 		// read
-    async getTodos(): Promise<Todo[]> {
-        try {
-            const todoRef = this.getTodoRef();
-            const q = query(todoRef, orderBy('updatedAt', 'desc'));
-            const snapshot = await getDocs(q);
-            return snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            } as Todo));
-        } catch (error) {
-            console.error('Error Get Todos:', error);
-            throw error;
-        }
-    },
+        async getTodos(): Promise<Todo[]> {
+            try {
+                const todoRef = this.getTodoRef();
+                // Tidak ada filter berdasarkan userId
+                const q = query(todoRef, orderBy('updatedAt', 'desc')); 
+                const snapshot = await getDocs(q);
+                return snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data()
+                } as Todo));
+            } catch (error) {
+                console.error('Error Get Todos:', error);
+                throw error;
+            }
+        },
+        
 
 		// update
     async updateTodo(id: string, todo: Partial<Todo>) {
